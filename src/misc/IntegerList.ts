@@ -1,9 +1,6 @@
-/*!
- * Copyright 2016 The ANTLR Project. All rights reserved.
- * Licensed under the BSD-3-Clause license. See LICENSE file in the project root for license information.
- */
 
-// ConvertTo-TS run at 2016-10-04T11:26:40.5099429-07:00
+
+
 
 import { Arrays } from "./Arrays";
 import { NotNull, Override } from "../Decorators";
@@ -14,10 +11,7 @@ const EMPTY_DATA: Int32Array = new Int32Array(0);
 const INITIAL_SIZE: number = 4;
 const MAX_ARRAY_SIZE: number = (((1 << 31) >>> 0) - 1) - 8;
 
-/**
- *
- * @author Sam Harwell
- */
+
 export class IntegerList {
 	@NotNull
 	private _data: Int32Array;
@@ -40,7 +34,7 @@ export class IntegerList {
 				this._size = 0;
 			}
 		} else {
-			// arg is Iterable<number>
+			
 			this._data = EMPTY_DATA;
 			this._size = 0;
 			for (let value of arg) {
@@ -68,7 +62,7 @@ export class IntegerList {
 			this._data.subarray(this._size, this._size + list.size).set(list._data);
 			this._size += list._size;
 		} else {
-			// list is JavaCollection<number>
+			
 			this.ensureCapacity(this._size + list.size);
 			let current: number = 0;
 			for (let xi of list) {
@@ -163,24 +157,7 @@ export class IntegerList {
 		this._data.subarray(0, this._size).sort();
 	}
 
-	/**
-	 * Compares the specified object with this list for equality.  Returns
-	 * `true` if and only if the specified object is also an {@link IntegerList},
-	 * both lists have the same size, and all corresponding pairs of elements in
-	 * the two lists are equal.  In other words, two lists are defined to be
-	 * equal if they contain the same elements in the same order.
-	 *
-	 * This implementation first checks if the specified object is this
-	 * list. If so, it returns `true`; if not, it checks if the
-	 * specified object is an {@link IntegerList}. If not, it returns `false`;
-	 * if so, it checks the size of both lists. If the lists are not the same size,
-	 * it returns `false`; otherwise it iterates over both lists, comparing
-	 * corresponding pairs of elements.  If any comparison returns `false`,
-	 * this method returns `false`.
-	 *
-	 * @param o the object to be compared for equality with this list
-	 * @returns `true` if the specified object is equal to this list
-	 */
+	
 	@Override
 	public equals(o: any): boolean {
 		if (o === this) {
@@ -204,15 +181,7 @@ export class IntegerList {
 		return true;
 	}
 
-	/**
-	 * Returns the hash code value for this list.
-	 *
-	 * This implementation uses exactly the code that is used to define the
-	 * list hash function in the documentation for the {@link List#hashCode}
-	 * method.
-	 *
-	 * @returns the hash code value for this list
-	 */
+	
 	@Override
 	public hashCode(): number {
 		let hashCode: number = 1;
@@ -223,9 +192,7 @@ export class IntegerList {
 		return hashCode;
 	}
 
-	/**
-	 * Returns a string representation of this list.
-	 */
+	
 	@Override
 	public toString(): string {
 		return this._data.toString();
@@ -275,13 +242,9 @@ export class IntegerList {
 		this._data = tmp;
 	}
 
-	/** Convert the list to a UTF-16 encoded char array. If all values are less
-	 *  than the 0xFFFF 16-bit code point limit then this is just a char array
-	 *  of 16-bit char as usual. For values in the supplementary range, encode
-	 * them as two UTF-16 code units.
-	 */
+	
 	public toCharArray(): Uint16Array {
-		// Optimize for the common case (all data values are < 0xFFFF) to avoid an extra scan
+		
 		let resultArray: Uint16Array = new Uint16Array(this._size);
 		let resultIdx = 0;
 		let calculatedPreciseResultSize = false;
@@ -293,7 +256,7 @@ export class IntegerList {
 				continue;
 			}
 
-			// Calculate the precise result size if we encounter a code point > 0xFFFF
+			
 			if (!calculatedPreciseResultSize) {
 				let newResultArray = new Uint16Array(this.charArraySize());
 				newResultArray.set(resultArray, 0);
@@ -301,7 +264,7 @@ export class IntegerList {
 				calculatedPreciseResultSize = true;
 			}
 
-			// This will throw RangeError if the code point is not a valid Unicode code point
+			
 			let pair = String.fromCodePoint(codePoint);
 			resultArray[resultIdx] = pair.charCodeAt(0);
 			resultArray[resultIdx + 1] = pair.charCodeAt(1);

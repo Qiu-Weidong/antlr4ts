@@ -1,9 +1,6 @@
-/*!
- * Copyright 2016 The ANTLR Project. All rights reserved.
- * Licensed under the BSD-3-Clause license. See LICENSE file in the project root for license information.
- */
 
-// ConvertTo-TS run at 2016-10-04T11:26:24.7363448-07:00
+
+
 
 
 import { NotNull, Override } from "../../Decorators";
@@ -14,7 +11,7 @@ import { TransitionType } from "./TransitionType";
 export class ActionTransition extends Transition {
 	public ruleIndex: number;
 	public actionIndex: number;
-	public isCtxDependent: boolean;  // e.g., $i ref in action
+	public isCtxDependent: boolean;  
 
 	constructor(@NotNull target: ATNState, ruleIndex: number, actionIndex: number = -1, isCtxDependent: boolean = false) {
 		super(target);
@@ -30,7 +27,7 @@ export class ActionTransition extends Transition {
 
 	@Override
 	get isEpsilon(): boolean {
-		return true; // we are to be ignored by analysis 'cept for predicates
+		return true; 
 	}
 
 	@Override

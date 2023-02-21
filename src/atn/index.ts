@@ -1,75 +1,75 @@
-// /*!
-//  * Copyright 2016 The ANTLR Project. All rights reserved.
-//  * Licensed under the BSD-3-Clause license. See LICENSE file in the project root for license information.
-//  */
 
-// export * from "./AbstractPredicateTransition";
-// export * from "./ActionTransition";
-// export * from "./info/AmbiguityInfo";
-// export * from "./ATN";
-// export * from "./config/ATNConfig";
-// export * from "./ATNConfigSet";
-// export * from "./ATNDeserializationOptions";
-// export * from "./ATNDeserializer";
-// // export * from "./ATNSerializer";
-// export * from "./ATNSimulator";
-// export * from "./state/ATNState";
-// export * from "./ATNStateType";
-// export * from "./ATNType";
-// export * from "./transition/AtomTransition";
-// export * from "./BasicBlockStartState";
-// export * from "./BasicState";
-// export * from "./BlockEndState";
-// export * from "./BlockStartState";
-// export * from "./transition/CodePointTransitions";
-// export * from "./info/ConflictInfo";
-// export * from "./ContextSensitivityInfo";
-// export * from "./DecisionEventInfo";
-// export * from "./DecisionInfo";
-// export * from "./DecisionState";
-// export * from "./EpsilonTransition";
-// export * from "./ErrorInfo";
-// export * from "./InvalidState";
-// export * from "./action/LexerAction";
-// export * from "./LexerActionExecutor";
-// export * from "./LexerActionType";
-// export * from "./LexerATNSimulator";
-// export * from "./action/LexerChannelAction";
-// export * from "./LexerCustomAction";
-// export * from "./action/LexerIndexedCustomAction";
-// export * from "./LexerModeAction";
-// export * from "./LexerMoreAction";
-// export * from "./LexerPopModeAction";
-// export * from "./LexerPushModeAction";
-// export * from "./LexerSkipAction";
-// export * from "./LexerTypeAction";
-// export * from "./LL1Analyzer";
-// export * from "./LookaheadEventInfo";
-// export * from "./LoopEndState";
-// export * from "./NotSetTransition";
-// export * from "./OrderedATNConfigSet";
-// export * from "./info/ParseInfo";
-// export * from "./ParserATNSimulator";
-// export * from "./PlusBlockStartState";
-// export * from "./PlusLoopbackState";
-// export * from "./PrecedencePredicateTransition";
-// export * from "./PredicateEvalInfo";
-// export * from "./PredicateTransition";
-// export * from "./PredictionContext";
-// export * from "./PredictionContextCache";
-// export * from "./PredictionMode";
-// export * from "./ProfilingATNSimulator";
-// export * from "./transition/RangeTransition";
-// export * from "./RuleStartState";
-// export * from "./RuleStopState";
-// export * from "./RuleTransition";
-// export * from "./SemanticContext";
-// export * from "./transition/SetTransition";
-// export * from "./SimulatorState";
-// export * from "./StarBlockStartState";
-// export * from "./StarLoopbackState";
-// export * from "./StarLoopEntryState";
-// export * from "./state/TokensStartState";
-// export * from "./transition/Transition";
-// export * from "./transition/TransitionType";
-// export * from "./transition/WildcardTransition";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

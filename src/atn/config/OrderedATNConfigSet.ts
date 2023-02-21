@@ -1,18 +1,12 @@
-/*!
- * Copyright 2016 The ANTLR Project. All rights reserved.
- * Licensed under the BSD-3-Clause license. See LICENSE file in the project root for license information.
- */
 
-// ConvertTo-TS run at 2016-10-04T11:26:30.9444556-07:00
+
+
 
 import { ATNConfig } from "./ATNConfig";
 import { ATNConfigSet } from "./ATNConfigSet";
 import { Override } from "../../Decorators";
 
-/**
- *
- * @author Sam Harwell
- */
+
 export class OrderedATNConfigSet extends ATNConfigSet {
 
 	constructor();
@@ -37,7 +31,7 @@ export class OrderedATNConfigSet extends ATNConfigSet {
 
 	@Override
 	protected getKey(e: ATNConfig): { state: number, alt: number } {
-		// This is a specially crafted key to ensure configurations are only merged if they are equal
+		
 		return { state: 0, alt: e.hashCode() };
 	}
 

@@ -1,7 +1,4 @@
-/*!
- * Copyright 2016 The ANTLR Project. All rights reserved.
- * Licensed under the BSD-3-Clause license. See LICENSE file in the project root for license information.
- */
+
 
 export * from "./ANTLRErrorListener";
 export * from "./ANTLRErrorStrategy";
@@ -24,9 +21,7 @@ export * from "./InterpreterRuleContext";
 export * from "./IntStream";
 export * from "./Lexer";
 export * from "./LexerInterpreter";
-export * from "./LexerNoViableAltException";
 export * from "./ListTokenSource";
-export * from "./NoViableAltException";
 export * from "./Parser";
 export * from "./ParserErrorListener";
 export * from "./ParserInterpreter";
@@ -44,8 +39,8 @@ export * from "./TokenFactory";
 export * from "./TokenSource";
 export * from "./TokenStream";
 export * from "./TokenStreamRewriter";
-// export * from "./UnbufferedCharStream";
-// export * from "./UnbufferedTokenStream";
+
+
 export * from "./Vocabulary";
 export * from "./VocabularyImpl";
 export * from "./WritableToken";

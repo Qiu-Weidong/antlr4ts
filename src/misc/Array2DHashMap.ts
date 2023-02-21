@@ -1,15 +1,12 @@
-/*!
- * Copyright 2016 The ANTLR Project. All rights reserved.
- * Licensed under the BSD-3-Clause license. See LICENSE file in the project root for license information.
- */
+
 
 import { Array2DHashSet } from "./Array2DHashSet";
 import { DefaultEqualityComparator } from "./DefaultEqualityComparator";
 import { EqualityComparator } from "./EqualityComparator";
 import { Equatable, JavaCollection, JavaMap, JavaSet } from "./Stubs";
 
-// Since `Array2DHashMap` is implemented on top of `Array2DHashSet`, we defined a bucket type which can store a
-// key-value pair. The value is optional since looking up values in the map by a key only needs to include the key.
+
+
 interface Bucket<K, V> { key: K; value?: V; }
 
 class MapKeyEqualityComparator<K, V> implements EqualityComparator<Bucket<K, V>> {

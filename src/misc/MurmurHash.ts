@@ -1,36 +1,19 @@
-/*!
- * Copyright 2016 The ANTLR Project. All rights reserved.
- * Licensed under the BSD-3-Clause license. See LICENSE file in the project root for license information.
- */
 
-// ConvertTo-TS run at 2016-10-03T02:09:42.1239660-07:00
+
+
 import { Equatable } from "./Stubs";
 
-/**
- *
- * @author Sam Harwell
- */
+
 export namespace MurmurHash {
 
 	const DEFAULT_SEED: number = 0;
 
-	/**
-	 * Initialize the hash using the specified `seed`.
-	 *
-	 * @param seed the seed (optional)
-	 * @returns the intermediate hash value
-	 */
+	
 	export function initialize(seed: number = DEFAULT_SEED): number {
 		return seed;
 	}
 
-	/**
-	 * Update the intermediate hash value for the next input `value`.
-	 *
-	 * @param hash the intermediate hash value
-	 * @param value the value to add to the current hash
-	 * @returns the updated intermediate hash value
-	 */
+	
 	export function update(hash: number, value: number | string | Equatable | null | undefined): number {
 		const c1: number = 0xCC9E2D51;
 		const c2: number = 0x1B873593;
@@ -60,14 +43,7 @@ export namespace MurmurHash {
 	}
 
 
-	/**
-	 * Apply the final computation steps to the intermediate value `hash`
-	 * to form the final result of the MurmurHash 3 hash function.
-	 *
-	 * @param hash the intermediate hash value
-	 * @param numberOfWords the number of integer values added to the hash
-	 * @returns the final hash result
-	 */
+	
 	export function finish(hash: number, numberOfWords: number): number {
 		hash = hash ^ (numberOfWords * 4);
 		hash = hash ^ (hash >>> 16);
@@ -78,15 +54,7 @@ export namespace MurmurHash {
 		return hash;
 	}
 
-	/**
-	 * Utility function to compute the hash code of an array using the
-	 * MurmurHash algorithm.
-	 *
-	 * @param <T> the array element type
-	 * @param data the array data
-	 * @param seed the seed for the MurmurHash algorithm
-	 * @returns the hash code of the data
-	 */
+	
 	export function hashCode<T extends number | string | Equatable>(data: Iterable<T>, seed: number = DEFAULT_SEED): number {
 		let hash: number = initialize(seed);
 		let length = 0;
@@ -99,10 +67,7 @@ export namespace MurmurHash {
 		return hash;
 	}
 
-	/**
-	 * Function to hash a string. Based on the implementation found here:
-	 * http://stackoverflow.com/a/7616484
-	 */
+	
 	function hashString(str: string): number {
 		let len = str.length;
 		if (len === 0) {

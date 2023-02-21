@@ -1,7 +1,4 @@
-/*!
- * Copyright 2016 The ANTLR Project. All rights reserved.
- * Licensed under the BSD-3-Clause license. See LICENSE file in the project root for license information.
- */
+
 
 import * as fs from "fs";
 import * as util from "util";
@@ -39,31 +36,9 @@ function splitToLines(buffer: Buffer): string[] {
 	return lines;
 }
 
-// A class to read plain text interpreter data produced by ANTLR.
+
 export namespace InterpreterDataReader {
-	/**
-	 * The structure of the data file is very simple. Everything is line based with empty lines
-	 * separating the different parts. For lexers the layout is:
-	 * token literal names:
-	 * ...
-	 *
-	 * token symbolic names:
-	 * ...
-	 *
-	 * rule names:
-	 * ...
-	 *
-	 * channel names:
-	 * ...
-	 *
-	 * mode names:
-	 * ...
-	 *
-	 * atn:
-	 * <a single line with comma separated int values> enclosed in a pair of squared brackets.
-	 *
-	 * Data for a parser does not contain channel and mode names.
-	 */
+	
 	export async function parseFile(fileName: string): Promise<InterpreterDataReader.InterpreterData> {
 		let result: InterpreterDataReader.InterpreterData = new InterpreterDataReader.InterpreterData();
 		let input: Buffer = await util.promisify(fs.readFile)(fileName);
@@ -118,7 +93,7 @@ export namespace InterpreterDataReader {
 			}
 
 			line = lines[lineIndex++];
-			if (line === "channel names:") { // Additional lexer data.
+			if (line === "channel names:") { 
 				result.channels = [];
 				for (line = lines[lineIndex++]; line !== undefined; line = lines[lineIndex++]) {
 					if (line.length === 0) {
@@ -172,7 +147,7 @@ export namespace InterpreterDataReader {
 			result.atn = deserializer.deserialize(serializedATN);
 		}
 		catch (e) {
-			// We just swallow the error and return empty objects instead.
+			
 		}
 
 		return result;
@@ -182,7 +157,7 @@ export namespace InterpreterDataReader {
 		public atn?: ATN;
 		public vocabulary: Vocabulary = VocabularyImpl.EMPTY_VOCABULARY;
 		public ruleNames: string[] = [];
-		public channels?: string[]; // Only valid for lexer grammars.
-		public modes?: string[]; // ditto
+		public channels?: string[]; 
+		public modes?: string[]; 
 	}
 }

@@ -1,9 +1,6 @@
-/*!
- * Copyright 2016 The ANTLR Project. All rights reserved.
- * Licensed under the BSD-3-Clause license. See LICENSE file in the project root for license information.
- */
 
-// ConvertTo-TS run at 2016-10-04T11:26:25.9683447-07:00
+
+
 
 
 import { Transition } from "./transition/Transition";
@@ -56,11 +53,11 @@ import { RuleTransition } from "./transition/RuleTransition";
 import { SetTransition } from "./transition/SetTransition";
 
 interface UnicodeDeserializer {
-	// Wrapper for readInt() or readInt32()
+	
 	readUnicode(data: Uint16Array, p: number): number;
 
-	// Work around Java not allowing mutation of captured variables
-	// by returning amount by which to increment p after each read
+	
+	
 	readonly size: number;
 }
 
@@ -69,51 +66,29 @@ const enum UnicodeDeserializingMode {
 	UNICODE_SMP,
 }
 
-/**
- *
- * @author Sam Harwell
- */
+
 export class ATNDeserializer {
 	static get SERIALIZED_VERSION(): number {
-		/* This value should never change. Updates following this version are
-		 * reflected as change in the unique ID SERIALIZED_UUID.
-		 */
+		
 		return 3;
 	}
 
-	/* WARNING: DO NOT MERGE THESE LINES. If UUIDs differ during a merge,
-	 * resolve the conflict by generating a new ID!
-	 */
+	
 
-	/**
-	 * This is the earliest supported serialized UUID.
-	 */
+	
 	private static readonly BASE_SERIALIZED_UUID: UUID = UUID.fromString("E4178468-DF95-44D0-AD87-F22A5D5FB6D3");
-	/**
-	 * This UUID indicates an extension of {@link #ADDED_PRECEDENCE_TRANSITIONS}
-	 * for the addition of lexer actions encoded as a sequence of
-	 * {@link LexerAction} instances.
-	 */
+	
 	private static readonly ADDED_LEXER_ACTIONS: UUID = UUID.fromString("AB35191A-1603-487E-B75A-479B831EAF6D");
-	/**
-	 * This UUID indicates the serialized ATN contains two sets of
-	 * IntervalSets, where the second set's values are encoded as
-	 * 32-bit integers to support the full Unicode SMP range up to U+10FFFF.
-	 */
+	
 	private static readonly ADDED_UNICODE_SMP: UUID = UUID.fromString("C23FEA89-0605-4f51-AFB8-058BCAB8C91B");
-	/**
-	 * This list contains all of the currently supported UUIDs, ordered by when
-	 * the feature first appeared in this branch.
-	 */
+	
 	private static readonly SUPPORTED_UUIDS: UUID[] = [
 		ATNDeserializer.BASE_SERIALIZED_UUID,
 		ATNDeserializer.ADDED_LEXER_ACTIONS,
 		ATNDeserializer.ADDED_UNICODE_SMP,
 	];
 
-	/**
-	 * This is the current serialized UUID.
-	 */
+	
 	private static readonly SERIALIZED_UUID: UUID = ATNDeserializer.ADDED_UNICODE_SMP;
 
 	@NotNull
@@ -127,19 +102,7 @@ export class ATNDeserializer {
 		this.deserializationOptions = deserializationOptions;
 	}
 
-	/**
-	 * Determines if a particular serialized representation of an ATN supports
-	 * a particular feature, identified by the {@link UUID} used for serializing
-	 * the ATN at the time the feature was first introduced.
-	 *
-	 * @param feature The {@link UUID} marking the first time the feature was
-	 * supported in the serialized ATN.
-	 * @param actualUuid The {@link UUID} of the actual serialized ATN which is
-	 * currently being deserialized.
-	 * @returns `true` if the `actualUuid` value represents a
-	 * serialized ATN at or after the feature identified by `feature` was
-	 * introduced; otherwise, `false`.
-	 */
+	
 	protected static isFeatureSupported(feature: UUID, actualUuid: UUID): boolean {
 		let featureIndex: number = ATNDeserializer.SUPPORTED_UUIDS.findIndex((e) => e.equals(feature));
 		if (featureIndex < 0) {
@@ -170,15 +133,15 @@ export class ATNDeserializer {
 	public deserialize(@NotNull data: Uint16Array): ATN {
 		data = data.slice(0);
 
-		// Each Uint16 value in data is shifted by +2 at the entry to this method. This is an encoding optimization
-		// targeting the serialized values 0 and -1 (serialized to 0xFFFF), each of which are very common in the
-		// serialized form of the ATN. In the modified UTF-8 that Java uses for compiled string literals, these two
-		// character values have multi-byte forms. By shifting each value by +2, they become characters 2 and 1 prior to
-		// writing the string, each of which have single-byte representations. Since the shift occurs in the tool during
-		// ATN serialization, each target is responsible for adjusting the values during deserialization.
+		
+		
+		
+		
+		
+		
 		//
-		// As a special case, note that the first element of data is not adjusted because it contains the major version
-		// number of the serialized ATN, which was fixed at 3 at the time the value shifting was implemented.
+		
+		
 		for (let i = 1; i < data.length; i++) {
 			data[i] = (data[i] - 2) & 0xFFFF;
 		}
@@ -204,14 +167,14 @@ export class ATNDeserializer {
 		let atn: ATN = new ATN(grammarType, maxTokenType);
 
 		//
-		// STATES
+		
 		//
 		let loopBackStateNumbers: Array<[LoopEndState, number]> = [];
 		let endStateNumbers: Array<[BlockStartState, number]> = [];
 		let nstates: number = ATNDeserializer.toInt(data[p++]);
 		for (let i = 0; i < nstates; i++) {
 			let stype: ATNStateType = ATNDeserializer.toInt(data[p++]);
-			// ignore bad type of states
+			
 			if (stype === ATNStateType.INVALID_TYPE) {
 				atn.addState(new InvalidState());
 				continue;
@@ -223,7 +186,7 @@ export class ATNDeserializer {
 			}
 
 			let s: ATNState = this.stateFactory(stype, ruleIndex);
-			if (stype === ATNStateType.LOOP_END) { // special case
+			if (stype === ATNStateType.LOOP_END) { 
 				let loopBackStateNumber: number = ATNDeserializer.toInt(data[p++]);
 				loopBackStateNumbers.push([s as LoopEndState, loopBackStateNumber]);
 			}
@@ -234,7 +197,7 @@ export class ATNDeserializer {
 			atn.addState(s);
 		}
 
-		// delay the assignment of loop back and end states until we know all the state instances have been initialized
+		
 		for (let pair of loopBackStateNumbers) {
 			pair[0].loopBackState = atn.states[pair[1]];
 		}
@@ -262,7 +225,7 @@ export class ATNDeserializer {
 		}
 
 		//
-		// RULES
+		
 		//
 		let nrules: number = ATNDeserializer.toInt(data[p++]);
 		if (atn.grammarType === ATNType.LEXER) {
@@ -284,8 +247,8 @@ export class ATNDeserializer {
 				atn.ruleToTokenType[i] = tokenType;
 
 				if (!ATNDeserializer.isFeatureSupported(ATNDeserializer.ADDED_LEXER_ACTIONS, uuid)) {
-					// this piece of unused metadata was serialized prior to the
-					// addition of LexerAction
+					
+					
 					let actionIndexIgnored: number = ATNDeserializer.toInt(data[p++]);
 					if (actionIndexIgnored === 0xFFFF) {
 						actionIndexIgnored = -1;
@@ -305,7 +268,7 @@ export class ATNDeserializer {
 		}
 
 		//
-		// MODES
+		
 		//
 		let nmodes: number = ATNDeserializer.toInt(data[p++]);
 		for (let i = 0; i < nmodes; i++) {
@@ -319,21 +282,21 @@ export class ATNDeserializer {
 		}
 
 		//
-		// SETS
+		
 		//
 		let sets: IntervalSet[] = [];
 
-		// First, read all sets with 16-bit Unicode code points <= U+FFFF.
+		
 		p = this.deserializeSets(data, p, sets, ATNDeserializer.getUnicodeDeserializer(UnicodeDeserializingMode.UNICODE_BMP));
 
-		// Next, if the ATN was serialized with the Unicode SMP feature,
-		// deserialize sets with 32-bit arguments <= U+10FFFF.
+		
+		
 		if (ATNDeserializer.isFeatureSupported(ATNDeserializer.ADDED_UNICODE_SMP, uuid)) {
 			p = this.deserializeSets(data, p, sets, ATNDeserializer.getUnicodeDeserializer(UnicodeDeserializingMode.UNICODE_SMP));
 		}
 
 		//
-		// EDGES
+		
 		//
 		let nedges: number = ATNDeserializer.toInt(data[p++]);
 		for (let i = 0; i < nedges; i++) {
@@ -344,13 +307,13 @@ export class ATNDeserializer {
 			let arg2: number = ATNDeserializer.toInt(data[p + 4]);
 			let arg3: number = ATNDeserializer.toInt(data[p + 5]);
 			let trans: Transition = this.edgeFactory(atn, ttype, src, trg, arg1, arg2, arg3, sets);
-			// console.log(`EDGE ${trans.constructor.name} ${src}->${trg} ${Transition.serializationNames[ttype]} ${arg1},${arg2},${arg3}`);
+			
 			let srcState: ATNState = atn.states[src];
 			srcState.addTransition(trans);
 			p += 6;
 		}
 
-		// edges for rule stop states can be derived, so they aren't serialized
+		
 		interface T { stopState: number; returnState: number; outermostPrecedenceReturn: number; }
 		let returnTransitionsSet = new Array2DHashSet<T>({
 			hashCode: (o: T) => o.stopState ^ o.returnState ^ o.outermostPrecedenceReturn,
@@ -390,7 +353,7 @@ export class ATNDeserializer {
 			}
 		}
 
-		// Add all elements from returnTransitions to the ATN
+		
 		for (let returnTransition of returnTransitions) {
 			let transition = new EpsilonTransition(atn.states[returnTransition.returnState], returnTransition.outermostPrecedenceReturn);
 			atn.ruleToStopState[returnTransition.stopState].addTransition(transition);
@@ -398,12 +361,12 @@ export class ATNDeserializer {
 
 		for (let state of atn.states) {
 			if (state instanceof BlockStartState) {
-				// we need to know the end state to set its start state
+				
 				if (state.endState === undefined) {
 					throw new Error("IllegalStateException");
 				}
 
-				// block end states can only be associated to a single block start state
+				
 				if (state.endState.startState !== undefined) {
 					throw new Error("IllegalStateException");
 				}
@@ -432,7 +395,7 @@ export class ATNDeserializer {
 		}
 
 		//
-		// DECISIONS
+		
 		//
 		let ndecisions: number = ATNDeserializer.toInt(data[p++]);
 		for (let i = 1; i <= ndecisions; i++) {
@@ -443,7 +406,7 @@ export class ATNDeserializer {
 		}
 
 		//
-		// LEXER ACTIONS
+		
 		//
 		if (atn.grammarType === ATNType.LEXER) {
 			if (supportsLexerActions) {
@@ -466,9 +429,9 @@ export class ATNDeserializer {
 				}
 			}
 			else {
-				// for compatibility with older serialized ATNs, convert the old
-				// serialized action index for action transitions to the new
-				// form, which is the index of a LexerCustomAction
+				
+				
+				
 				let legacyLexerActions: LexerAction[] = [];
 				for (let state of atn.states) {
 					for (let i = 0; i < state.numberOfTransitions; i++) {
@@ -523,7 +486,7 @@ export class ATNDeserializer {
 				let endState: ATNState | undefined;
 				let excludeTransition: Transition | undefined;
 				if (atn.ruleToStartState[i].isPrecedenceRule) {
-					// wrap from the beginning of the rule to the StarLoopEntryState
+					
 					endState = undefined;
 					for (let state of atn.states) {
 						if (state.ruleIndex !== i) {
@@ -555,7 +518,7 @@ export class ATNDeserializer {
 					endState = atn.ruleToStopState[i];
 				}
 
-				// all non-excluded transitions that currently target end state need to target blockEnd instead
+				
 				for (let state of atn.states) {
 					for (let i = 0; i < state.numberOfTransitions; i++) {
 						let transition = state.transition(i);
@@ -569,13 +532,13 @@ export class ATNDeserializer {
 					}
 				}
 
-				// all transitions leaving the rule start state need to leave blockStart instead
+				
 				while (atn.ruleToStartState[i].numberOfTransitions > 0) {
 					let transition: Transition = atn.ruleToStartState[i].removeTransition(atn.ruleToStartState[i].numberOfTransitions - 1);
 					bypassStart.addTransition(transition);
 				}
 
-				// link the new states
+				
 				atn.ruleToStartState[i].addTransition(new EpsilonTransition(bypassStart));
 				bypassStop.addTransition(new EpsilonTransition(endState));
 
@@ -586,7 +549,7 @@ export class ATNDeserializer {
 			}
 
 			if (this.deserializationOptions.isVerifyATN) {
-				// reverify after modification
+				
 				this.verifyATN(atn);
 			}
 		}
@@ -604,7 +567,7 @@ export class ATNDeserializer {
 			}
 
 			if (this.deserializationOptions.isVerifyATN) {
-				// reverify after modification
+				
 				this.verifyATN(atn);
 			}
 		}
@@ -639,15 +602,9 @@ export class ATNDeserializer {
 		return p;
 	}
 
-	/**
-	 * Analyze the {@link StarLoopEntryState} states in the specified ATN to set
-	 * the {@link StarLoopEntryState#precedenceRuleDecision} field to the
-	 * correct value.
-	 *
-	 * @param atn The ATN.
-	 */
+	
 	protected markPrecedenceDecisions(@NotNull atn: ATN): void {
-		// Map rule index -> precedence decision for that rule
+		
 		let rulePrecedenceDecisions = new Map<number, StarLoopEntryState>();
 
 		for (let state of atn.states) {
@@ -655,10 +612,7 @@ export class ATNDeserializer {
 				continue;
 			}
 
-			/* We analyze the ATN to determine if this ATN decision state is the
-			 * decision for the closure block that determines whether a
-			 * precedence rule should continue or complete.
-			 */
+			
 			if (atn.ruleToStartState[state.ruleIndex].isPrecedenceRule) {
 				let maybeLoopEndState: ATNState = state.transition(state.numberOfTransitions - 1).target;
 				if (maybeLoopEndState instanceof LoopEndState) {
@@ -671,8 +625,8 @@ export class ATNDeserializer {
 			}
 		}
 
-		// After marking precedence decisions, we go back through and fill in
-		// StarLoopEntryState.precedenceLoopbackStates.
+		
+		
 		for (let precedenceDecision of rulePrecedenceDecisions) {
 			for (let transition of atn.ruleToStopState[precedenceDecision[0]].getTransitions()) {
 				if (transition.serializationType !== TransitionType.EPSILON) {
@@ -690,7 +644,7 @@ export class ATNDeserializer {
 	}
 
 	protected verifyATN(atn: ATN): void {
-		// verify assumptions
+		
 		for (let state of atn.states) {
 			this.checkCondition(state !== undefined, "ATN states should not be undefined.");
 			if (state.stateType === ATNStateType.INVALID_TYPE) {
@@ -793,7 +747,7 @@ export class ATNDeserializer {
 
 			case TransitionType.NOT_SET:
 			case TransitionType.WILDCARD:
-				// not implemented yet
+				
 				continue;
 
 			default:
@@ -950,7 +904,7 @@ export class ATNDeserializer {
 
 	private static optimizeSets(atn: ATN, preserveOrder: boolean): number {
 		if (preserveOrder) {
-			// this optimization currently doesn't preserve edge order.
+			
 			return 0;
 		}
 
@@ -974,7 +928,7 @@ export class ATNDeserializer {
 				}
 
 				if (transition instanceof NotSetTransition) {
-					// TODO: not yet implemented
+					
 					continue;
 				}
 

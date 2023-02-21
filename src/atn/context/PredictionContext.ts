@@ -1,9 +1,6 @@
-/*!
- * Copyright 2016 The ANTLR Project. All rights reserved.
- * Licensed under the BSD-3-Clause license. See LICENSE file in the project root for license information.
- */
 
-// ConvertTo-TS run at 2016-10-04T11:26:35.3812636-07:00
+
+
 
 
 
@@ -21,27 +18,7 @@ import { PredictionContextCache } from "./PredictionContextCache";
 const INITIAL_HASH: number = 1;
 
 export abstract class PredictionContext implements Equatable {
-	/**
-	 * Stores the computed hash code of this {@link PredictionContext}. The hash
-	 * code is computed in parts to match the following reference algorithm.
-	 *
-	 * ```
-	 * private int referenceHashCode() {
-	 *   int hash = {@link MurmurHash#initialize MurmurHash.initialize}({@link #INITIAL_HASH});
-	 *
-	 *   for (int i = 0; i &lt; this.size; i++) {
-	 *     hash = {@link MurmurHash#update MurmurHash.update}(hash, {@link #getParent getParent}(i));
-	 *   }
-	 *
-	 *   for (int i = 0; i &lt; this.size; i++) {
-	 *     hash = {@link MurmurHash#update MurmurHash.update}(hash, {@link #getReturnState getReturnState}(i));
-	 *   }
-	 *
-	 *   hash = {@link MurmurHash#finish MurmurHash.finish}(hash, 2 * this.size);
-	 *   return hash;
-	 * }
-	 * ```
-	 */
+	
 	private readonly cachedHashCode: number;
 
 	constructor(cachedHashCode: number) {
@@ -83,7 +60,7 @@ export abstract class PredictionContext implements Equatable {
 
 	public abstract findReturnState(returnState: number): number;
 
-	// @NotNull
+	
 	public abstract getParent(index: number): PredictionContext;
 
 	protected abstract addEmptyContext(): PredictionContext;
@@ -198,7 +175,7 @@ export abstract class PredictionContext implements Equatable {
 		}
 
 		if (parentsList.length === 0) {
-			// if one of them was EMPTY_LOCAL, it would be empty and handled at the beginning of the method
+			
 			return PredictionContext.EMPTY_FULL;
 		} else if (parentsList.length === 1) {
 			return new SingletonPredictionContext(parentsList[0], returnStatesList[0]);
@@ -254,7 +231,7 @@ export abstract class PredictionContext implements Equatable {
 			return context;
 		}
 
-		// We know parents.length>0 because context.isEmpty is checked at the beginning of the method.
+		
 		let updated: PredictionContext;
 		if (parents.length === 1) {
 			updated = new SingletonPredictionContext(parents[0], context.getReturnState(0));
@@ -293,7 +270,7 @@ export abstract class PredictionContext implements Equatable {
 		return this.cachedHashCode;
 	}
 
-	// @Override
+	
 	public abstract equals(o: any): boolean;
 
 	public toStrings(recognizer: Recognizer<any, any> | undefined, currentState: number, stop: PredictionContext = PredictionContext.EMPTY_FULL): string[] {
@@ -327,7 +304,7 @@ export abstract class PredictionContext implements Equatable {
 
 				if (recognizer) {
 					if (localBuffer.length > 1) {
-						// first char is '[', if more than that this isn't the first rule
+						
 						localBuffer += " ";
 					}
 
@@ -338,7 +315,7 @@ export abstract class PredictionContext implements Equatable {
 				} else if (p.getReturnState(index) !== PredictionContext.EMPTY_FULL_STATE_KEY) {
 					if (!p.isEmpty) {
 						if (localBuffer.length > 1) {
-							// first char is '[', if more than that this isn't the first rule
+							
 							localBuffer += " ";
 						}
 
@@ -579,7 +556,7 @@ class ArrayPredictionContext extends PredictionContext {
 		}
 
 		if (this.hashCode() !== o.hashCode()) {
-			// can't be same if hash is different
+			
 			return false;
 		}
 
@@ -648,20 +625,20 @@ export class SingletonPredictionContext extends PredictionContext {
 
 	constructor(@NotNull parent: PredictionContext, returnState: number) {
 		super(PredictionContext.calculateSingleHashCode(parent, returnState));
-		// assert(returnState != PredictionContext.EMPTY_FULL_STATE_KEY && returnState != PredictionContext.EMPTY_LOCAL_STATE_KEY);
+		
 		this.parent = parent;
 		this.returnState = returnState;
 	}
 
 	@Override
 	public getParent(index: number): PredictionContext {
-		// assert(index == 0);
+		
 		return this.parent;
 	}
 
 	@Override
 	public getReturnState(index: number): number {
-		// assert(index == 0);
+		
 		return this.returnState;
 	}
 
@@ -736,7 +713,7 @@ export namespace PredictionContext {
 		public static readonly INSTANCE: IdentityEqualityComparator = new IdentityEqualityComparator();
 
 		private IdentityEqualityComparator() {
-			// intentionally empty
+			
 		}
 
 		@Override

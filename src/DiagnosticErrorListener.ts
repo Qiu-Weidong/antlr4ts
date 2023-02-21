@@ -1,9 +1,6 @@
-/*!
- * Copyright 2016 The ANTLR Project. All rights reserved.
- * Licensed under the BSD-3-Clause license. See LICENSE file in the project root for license information.
- */
 
-// ConvertTo-TS run at 2016-10-04T11:26:51.2133685-07:00
+
+
 
 import { ATNConfig } from "./atn/config/ATNConfig";
 import { BitSet } from "./misc/BitSet";
@@ -18,50 +15,26 @@ import { Interval } from "./misc/Interval";
 import { ATNConfigSet } from "./atn/config/ATNConfigSet";
 import { SimulatorState } from "./atn/state/SimulatorState";
 
-/**
- * This implementation of {@link ANTLRErrorListener} can be used to identify
- * certain potential correctness and performance problems in grammars. "Reports"
- * are made by calling {@link Parser#notifyErrorListeners} with the appropriate
- * message.
- *
- * * **Ambiguities**: These are cases where more than one path through the
- *   grammar can match the input.
- * * **Weak context sensitivity**: These are cases where full-context
- *   prediction resolved an SLL conflict to a unique alternative which equaled the
- *   minimum alternative of the SLL conflict.
- * * **Strong (forced) context sensitivity**: These are cases where the
- *   full-context prediction resolved an SLL conflict to a unique alternative,
- *   *and* the minimum alternative of the SLL conflict was found to not be
- *   a truly viable alternative. Two-stage parsing cannot be used for inputs where
- *   this situation occurs.
- *
- * @author Sam Harwell
- */
+
 export class DiagnosticErrorListener implements ParserErrorListener {
 
-	/**
-	 * Initializes a new instance of {@link DiagnosticErrorListener}, specifying
-	 * whether all ambiguities or only exact ambiguities are reported.
-	 *
-	 * @param exactOnly `true` to report only exact ambiguities, otherwise
-	 * `false` to report all ambiguities.  Defaults to true.
-	 */
+	
 	constructor(protected exactOnly: boolean = true) {
 		this.exactOnly = exactOnly;
 	}
 
 	@Override
 	public syntaxError<T extends Token>(
-		/*@NotNull*/
+		
 		recognizer: Recognizer<T, any>,
 		offendingSymbol: T | undefined,
 		line: number,
 		charPositionInLine: number,
-		/*@NotNull*/
+		
 		msg: string,
 		e: RecognitionException | undefined): void
 	{
-		// intentionally empty
+		
 	}
 
 	@Override
@@ -133,17 +106,7 @@ export class DiagnosticErrorListener implements ParserErrorListener {
 		return `${decision} (${ruleName})`;
 	}
 
-	/**
-	 * Computes the set of conflicting or ambiguous alternatives from a
-	 * configuration set, if that information was not already provided by the
-	 * parser.
-	 *
-	 * @param reportedAlts The set of conflicting or ambiguous alternatives, as
-	 * reported by the parser.
-	 * @param configs The conflicting or ambiguous configuration set.
-	 * @returns Returns `reportedAlts` if it is not `undefined`, otherwise
-	 * returns the set of alternatives represented in `configs`.
-	 */
+	
 	@NotNull
 	protected getConflictingAlts(reportedAlts: BitSet | undefined, @NotNull configs: ATNConfigSet): BitSet {
 		if (reportedAlts != null) {

@@ -1,9 +1,6 @@
-/*!
- * Copyright 2016 The ANTLR Project. All rights reserved.
- * Licensed under the BSD-3-Clause license. See LICENSE file in the project root for license information.
- */
 
-// ConvertTo-TS run at 2016-10-04T11:26:38.7771056-07:00
+
+
 
 import { AcceptStateInfo } from "../atn/info/AcceptStateInfo";
 import { ATN } from "../atn/ATN";
@@ -17,60 +14,30 @@ import { ATNConfigSet } from "../atn/config/ATNConfigSet";
 import { PredictionContext } from "../atn/context/PredictionContext";
 import { SemanticContext } from "../atn/context/SemanticContext";
 
-/** A DFA state represents a set of possible ATN configurations.
- *  As Aho, Sethi, Ullman p. 117 says "The DFA uses its state
- *  to keep track of all possible states the ATN can be in after
- *  reading each input symbol.  That is to say, after reading
- *  input a1a2..an, the DFA is in a state that represents the
- *  subset T of the states of the ATN that are reachable from the
- *  ATN's start state along some path labeled a1a2..an."
- *  In conventional NFA&rarr;DFA conversion, therefore, the subset T
- *  would be a bitset representing the set of states the
- *  ATN could be in.  We need to track the alt predicted by each
- *  state as well, however.  More importantly, we need to maintain
- *  a stack of states, tracking the closure operations as they
- *  jump from rule to rule, emulating rule invocations (method calls).
- *  I have to add a stack to simulate the proper lookahead sequences for
- *  the underlying LL grammar from which the ATN was derived.
- *
- *  I use a set of ATNConfig objects not simple states.  An ATNConfig
- *  is both a state (ala normal conversion) and a RuleContext describing
- *  the chain of rules (if any) followed to arrive at that state.
- *
- *  A DFA state may have multiple references to a particular state,
- *  but with different ATN contexts (with same or different alts)
- *  meaning that state was reached via a different set of rule invocations.
- */
+
 export class DFAState {
 	public stateNumber: number = -1;
 
 	@NotNull
 	public configs: ATNConfigSet;
 
-	/** `edges.get(symbol)` points to target of symbol.
-	 */
+	
 	@NotNull
 	private readonly edges: Map<number, DFAState>;
 
 	private _acceptStateInfo: AcceptStateInfo | undefined;
 
-	/** These keys for these edges are the top level element of the global context. */
+	
 	@NotNull
 	private readonly contextEdges: Map<number, DFAState>;
 
-	/** Symbols in this set require a global context transition before matching an input symbol. */
+	
 	private contextSymbols: BitSet | undefined;
 
-	/**
-	 * This list is computed by {@link ParserATNSimulator#predicateDFAState}.
-	 */
+	
 	public predicates: DFAState.PredPrediction[] | undefined;
 
-	/**
-	 * Constructs a new `DFAState`.
-	 *
-	 * @param configs The set of ATN configurations defining this state.
-	 */
+	
 	constructor(configs: ATNConfigSet) {
 		this.configs = configs;
 		this.edges = new Map<number, DFAState>();
@@ -191,22 +158,10 @@ export class DFAState {
 		return hash;
 	}
 
-	/**
-	 * Two {@link DFAState} instances are equal if their ATN configuration sets
-	 * are the same. This method is used to see if a state already exists.
-	 *
-	 * Because the number of alternatives and number of ATN configurations are
-	 * finite, there is a finite number of DFA states that can be processed.
-	 * This is necessary to show that the algorithm terminates.
-	 *
-	 * Cannot test the DFA state numbers here because in
-	 * {@link ParserATNSimulator#addDFAState} we need to know if any other state
-	 * exists that has this exact set of ATN configurations. The
-	 * {@link #stateNumber} is irrelevant.
-	 */
+	
 	@Override
 	public equals(o: any): boolean {
-		// compare set of ATN configurations in this set with other
+		
 		if (this === o) {
 			return true;
 		}
@@ -217,7 +172,7 @@ export class DFAState {
 
 		let other: DFAState = o;
 		let sameSet: boolean = this.configs.equals(other.configs);
-//		System.out.println("DFAState.equals: "+configs+(sameSet?"==":"!=")+other.configs);
+
 		return sameSet;
 	}
 
@@ -239,10 +194,10 @@ export class DFAState {
 }
 
 export namespace DFAState {
-	/** Map a predicate to a predicted alternative. */
+	
 	export class PredPrediction {
 		@NotNull
-		public pred: SemanticContext;  // never null; at least SemanticContext.NONE
+		public pred: SemanticContext;  
 		public alt: number;
 		constructor(@NotNull pred: SemanticContext, alt: number) {
 			this.alt = alt;

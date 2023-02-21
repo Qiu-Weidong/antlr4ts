@@ -1,14 +1,9 @@
-/*!
- * Copyright 2016 The ANTLR Project. All rights reserved.
- * Licensed under the BSD-3-Clause license. See LICENSE file in the project root for license information.
- */
+
 
 import * as assert from "assert";
 import * as Character from "./misc/Character";
 
-/**
- * Wrapper for `Uint8Array` / `Uint16Array` / `Int32Array`.
- */
+
 export class CodePointBuffer {
 	private readonly buffer: Uint8Array | Uint16Array | Int32Array;
 	private _position: number;
@@ -211,7 +206,7 @@ export namespace CodePointBuffer {
 						outOffset++;
 						this.prevHighSurrogate = -1;
 					} else {
-						// Dangling high surrogate
+						
 						outInt[outOffset] = this.prevHighSurrogate;
 						outOffset++;
 						if (Character.isHighSurrogate(c)) {
@@ -231,7 +226,7 @@ export namespace CodePointBuffer {
 			}
 
 			if (this.prevHighSurrogate !== -1) {
-				// Dangling high surrogate
+				
 				outInt[outOffset] = this.prevHighSurrogate;
 				outOffset++;
 			}
@@ -240,7 +235,7 @@ export namespace CodePointBuffer {
 		}
 
 		private byteToCharBuffer(toAppend: number): void {
-			// CharBuffers hold twice as much per unit as ByteBuffers, so start with half the capacity.
+			
 			let newBuffer: Uint16Array = new Uint16Array(Math.max(this.position + toAppend, this.buffer.length >> 1));
 			newBuffer.set(this.buffer.subarray(0, this.position), 0);
 
@@ -249,7 +244,7 @@ export namespace CodePointBuffer {
 		}
 
 		private byteToIntBuffer(toAppend: number): void {
-			// IntBuffers hold four times as much per unit as ByteBuffers, so start with one quarter the capacity.
+			
 			let newBuffer: Int32Array = new Int32Array(Math.max(this.position + toAppend, this.buffer.length >> 2));
 			newBuffer.set(this.buffer.subarray(0, this.position), 0);
 
@@ -258,7 +253,7 @@ export namespace CodePointBuffer {
 		}
 
 		private charToIntBuffer(toAppend: number): void {
-			// IntBuffers hold two times as much per unit as ByteBuffers, so start with one half the capacity.
+			
 			let newBuffer: Int32Array = new Int32Array(Math.max(this.position + toAppend, this.buffer.length >> 1));
 			newBuffer.set(this.buffer.subarray(0, this.position), 0);
 

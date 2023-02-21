@@ -1,9 +1,6 @@
-﻿/*!
- * Copyright 2016 The ANTLR Project. All rights reserved.
- * Licensed under the BSD-3-Clause license. See LICENSE file in the project root for license information.
- */
+﻿
 
-// ConvertTo-TS run at 2016-10-04T11:26:46.4373888-07:00
+
 
 import { CharStreams } from "../../CharStreams";
 import { CommonTokenStream } from "../../CommonTokenStream";
@@ -22,46 +19,10 @@ import { XPathTokenElement } from "./XPathTokenElement";
 import { XPathWildcardAnywhereElement } from "./XPathWildcardAnywhereElement";
 import { XPathWildcardElement } from "./XPathWildcardElement";
 
-/**
- * Represent a subset of XPath XML path syntax for use in identifying nodes in
- * parse trees.
- *
- * Split path into words and separators `/` and `//` via ANTLR
- * itself then walk path elements from left to right. At each separator-word
- * pair, find set of nodes. Next stage uses those as work list.
- *
- * The basic interface is
- * {@link XPath#findAll ParseTree.findAll}`(tree, pathString, parser)`.
- * But that is just shorthand for:
- *
- * ```
- * let p = new XPath(parser, pathString);
- * return p.evaluate(tree);
- * ```
- *
- * See `TestXPath` for descriptions. In short, this
- * allows operators:
- *
- * | | |
- * | --- | --- |
- * | `/` | root |
- * | `//` | anywhere |
- * | `!` | invert; this much appear directly after root or anywhere operator |
- *
- * and path elements:
- *
- * | | |
- * | --- | --- |
- * | `ID` | token name |
- * | `'string'` | any string literal token from the grammar |
- * | `expr` | rule name |
- * | `*` | wildcard matching any node |
- *
- * Whitespace is not allowed.
- */
+
 export class XPath {
-	public static readonly WILDCARD: string = "*"; // word not operator/separator
-	public static readonly NOT: string = "!"; 	   // word for invert operator
+	public static readonly WILDCARD: string = "*"; 
+	public static readonly NOT: string = "!"; 	   
 
 	protected path: string;
 	protected elements: XPathElement[];
@@ -71,10 +32,10 @@ export class XPath {
 		this.parser = parser;
 		this.path = path;
 		this.elements = this.split(path);
-		// console.log(this.elements.toString());
+		
 	}
 
-	// TODO: check for invalid token/rule names, bad syntax
+	
 
 	public split(path: string): XPathElement[] {
 		let lexer = new XPathLexer(CharStreams.fromString(path));
@@ -96,7 +57,7 @@ export class XPath {
 		}
 
 		let tokens: Token[] = tokenStream.getTokens();
-		// console.log("path=" + path + "=>" + tokens);
+		
 		let elements: XPathElement[] = [];
 		let n: number = tokens.length;
 		let i: number = 0;
@@ -138,11 +99,7 @@ export class XPath {
 		return elements;
 	}
 
-	/**
-	 * Convert word like `*` or `ID` or `expr` to a path
-	 * element. `anywhere` is `true` if `//` precedes the
-	 * word.
-	 */
+	
 	protected getXPathElement(wordToken: Token, anywhere: boolean): XPathElement {
 		if (wordToken.type === Token.EOF) {
 			throw new Error("Missing path element at end of path");
@@ -187,10 +144,7 @@ export class XPath {
 		return p.evaluate(tree);
 	}
 
-	/**
-	 * Return a list of all nodes starting at `t` as root that satisfy the
-	 * path. The root `/` is relative to the node passed to {@link evaluate}.
-	 */
+	
 	public evaluate(t: ParseTree): Set<ParseTree> {
 		let dummyRoot = new ParserRuleContext();
 		dummyRoot.addChild(t as ParserRuleContext);
@@ -202,9 +156,9 @@ export class XPath {
 			let next = new Set<ParseTree>();
 			for (let node of work) {
 				if (node.childCount > 0) {
-					// only try to match next element if it has children
-					// e.g., //func/*/stat might have a token node for which
-					// we can't go looking for stat nodes.
+					
+					
+					
 					let matching = this.elements[i].evaluate(node);
 					matching.forEach(next.add, next);
 				}

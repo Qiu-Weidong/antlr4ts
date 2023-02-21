@@ -1,9 +1,6 @@
-/*!
- * Copyright 2016 The ANTLR Project. All rights reserved.
- * Licensed under the BSD-3-Clause license. See LICENSE file in the project root for license information.
- */
 
-// ConvertTo-TS run at 2016-10-04T11:26:38.5097925-07:00
+
+
 
 import { ATN } from "../atn/ATN";
 import { ATNSimulator } from "../atn/ATNSimulator";
@@ -11,12 +8,12 @@ import { ATNState } from "../atn/state/ATNState";
 import { DFA } from "./DFA";
 import { DFAState } from "./DFAState";
 import { NotNull, Override } from "../Decorators";
-import { PredictionContext } from "../atn/PredictionContext";
 import { Recognizer } from "../Recognizer";
 import { Vocabulary } from "../Vocabulary";
 import { VocabularyImpl } from "../VocabularyImpl";
+import { PredictionContext } from "../atn/context/PredictionContext";
 
-/** A DFA walker that knows how to dump them to serialized strings. */
+
 export class DFASerializer {
 	@NotNull
 	private dfa: DFA;
@@ -27,9 +24,9 @@ export class DFASerializer {
 
 	public atn?: ATN;
 
-	constructor(/*@NotNull*/ dfa: DFA, /*@NotNull*/ vocabulary: Vocabulary);
-	constructor(/*@NotNull*/ dfa: DFA, /*@Nullable*/ parser: Recognizer<any, any> | undefined);
-	constructor(/*@NotNull*/ dfa: DFA, /*@NotNull*/ vocabulary: Vocabulary, /*@Nullable*/ ruleNames: string[] | undefined, /*@Nullable*/ atn: ATN | undefined);
+	constructor( dfa: DFA,  vocabulary: Vocabulary);
+	constructor( dfa: DFA,  parser: Recognizer<any, any> | undefined);
+	constructor( dfa: DFA,  vocabulary: Vocabulary,  ruleNames: string[] | undefined,  atn: ATN | undefined);
 	constructor(dfa: DFA, vocabulary: Vocabulary | Recognizer<any, any> | undefined, ruleNames?: string[], atn?: ATN) {
 		if (vocabulary instanceof Recognizer) {
 			ruleNames = vocabulary.ruleNames;
@@ -100,7 +97,7 @@ export class DFASerializer {
 		if (output.length === 0) {
 			return "";
 		}
-		//return Utils.sortLinesInString(output);
+		
 		return output;
 	}
 

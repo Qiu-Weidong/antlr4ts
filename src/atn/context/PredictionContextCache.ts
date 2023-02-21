@@ -1,9 +1,6 @@
-/*!
- * Copyright 2016 The ANTLR Project. All rights reserved.
- * Licensed under the BSD-3-Clause license. See LICENSE file in the project root for license information.
- */
 
-// ConvertTo-TS run at 2016-10-04T11:26:35.6390614-07:00
+
+
 
 
 import { PredictionContext } from "./PredictionContext";
@@ -12,12 +9,7 @@ import { Override } from "../../Decorators";
 import { Array2DHashMap, ObjectEqualityComparator } from "../../misc";
 import { JavaMap } from "../../misc/Stubs";
 
-/** Used to cache {@link PredictionContext} objects. Its used for the shared
- *  context cash associated with contexts in DFA states. This cache
- *  can be used for both lexers and parsers.
- *
- * @author Sam Harwell
- */
+
 export class PredictionContextCache {
 	public static UNCACHED: PredictionContextCache = new PredictionContextCache(false);
 

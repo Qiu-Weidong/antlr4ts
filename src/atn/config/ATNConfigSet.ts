@@ -1,9 +1,6 @@
-/*!
- * Copyright 2016 The ANTLR Project. All rights reserved.
- * Licensed under the BSD-3-Clause license. See LICENSE file in the project root for license information.
- */
 
-// ConvertTo-TS run at 2016-10-04T11:26:25.5488013-07:00
+
+
 
 
 
@@ -43,61 +40,24 @@ function NewKeyedConfigMap(map?: Array2DHashMap<KeyType, ATNConfig>) {
 	}
 }
 
-/**
- * Represents a set of ATN configurations (see `ATNConfig`). As configurations are added to the set, they are merged
- * with other `ATNConfig` instances already in the set when possible using the graph-structured stack.
- *
- * An instance of this class represents the complete set of positions (with context) in an ATN which would be associated
- * with a single DFA state. Its internal representation is more complex than traditional state used for NFA to DFA
- * conversion due to performance requirements (both improving speed and reducing memory overhead) as well as supporting
- * features such as semantic predicates and non-greedy operators in a form to support ANTLR's prediction algorithm.
- *
- * @author Sam Harwell
- */
+
 export class ATNConfigSet implements JavaSet<ATNConfig> {
-	/**
-	 * This maps (state, alt) -> merged {@link ATNConfig}. The key does not account for
-	 * the {@link ATNConfig#getSemanticContext} of the value, which is only a problem if a single
-	 * `ATNConfigSet` contains two configs with the same state and alternative
-	 * but different semantic contexts. When this case arises, the first config
-	 * added to this map stays, and the remaining configs are placed in {@link #unmerged}.
-	 *
-	 * This map is only used for optimizing the process of adding configs to the set,
-	 * and is `undefined` for read-only sets stored in the DFA.
-	 */
+	
 	private mergedConfigs?: Array2DHashMap<KeyType, ATNConfig>;
 
-	/**
-	 * This is an "overflow" list holding configs which cannot be merged with one
-	 * of the configs in {@link #mergedConfigs} but have a colliding key. This
-	 * occurs when two configs in the set have the same state and alternative but
-	 * different semantic contexts.
-	 *
-	 * This list is only used for optimizing the process of adding configs to the set,
-	 * and is `undefined` for read-only sets stored in the DFA.
-	 */
+	
 	private unmerged?: ATNConfig[];
 
-	/**
-	 * This is a list of all configs in this set.
-	 */
+	
 	private configs: ATNConfig[];
 
 	private _uniqueAlt: number = 0;
 	private _conflictInfo?: ConflictInfo;
-	// Used in parser and lexer. In lexer, it indicates we hit a pred
-	// while computing a closure operation.  Don't make a DFA state from this.
+	
+	
 	private _hasSemanticContext: boolean = false;
 	private _dipsIntoOuterContext: boolean = false;
-	/**
-	 * When `true`, this config set represents configurations where the entire
-	 * outer context has been consumed by the ATN interpreter. This prevents the
-	 * {@link ParserATNSimulator#closure} from pursuing the global FOLLOW when a
-	 * rule stop state is reached with an empty prediction context.
-	 *
-	 * Note: `outermostConfigSet` and {@link #dipsIntoOuterContext} should never
-	 * be true at the same time.
-	 */
+	
 	private outermostConfigSet: boolean = false;
 
 	private cachedHashCode: number = -1;
@@ -135,14 +95,11 @@ export class ATNConfigSet implements JavaSet<ATNConfig> {
 				this._conflictInfo = set._conflictInfo;
 			}
 
-			// if (!readonly && set.isReadOnly) -> addAll is called from clone()
+			
 		}
 	}
 
-	/**
-	 * Get the set of all alternatives represented by configurations in this
-	 * set.
-	 */
+	
 	@NotNull
 	public getRepresentedAlternatives(): BitSet {
 		if (this._conflictInfo != null) {
@@ -323,7 +280,7 @@ export class ATNConfigSet implements JavaSet<ATNConfig> {
 	}
 
 	private updatePropertiesForMergedConfig(config: ATNConfig): void {
-		// merged configs can't change the alt or semantic context
+		
 		this._dipsIntoOuterContext = this._dipsIntoOuterContext || config.reachesIntoOuterContext;
 		assert(!this.outermostConfigSet || !this._dipsIntoOuterContext);
 	}

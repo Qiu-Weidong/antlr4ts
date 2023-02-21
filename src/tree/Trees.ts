@@ -1,9 +1,6 @@
-/*!
- * Copyright 2016 The ANTLR Project. All rights reserved.
- * Licensed under the BSD-3-Clause license. See LICENSE file in the project root for license information.
- */
 
-// ConvertTo-TS run at 2016-10-04T11:26:48.3187865-07:00
+
+
 
 import { Arrays } from "../misc/Arrays";
 import { ATN } from "../atn/ATN";
@@ -21,26 +18,18 @@ import { Token } from "../Token";
 import { Tree } from "./Tree";
 import * as Utils from "../misc/Utils";
 
-/** A set of utility routines useful for all kinds of ANTLR trees. */
+
 export class Trees {
-	/** Print out a whole tree in LISP form. {@link #getNodeText} is used on the
-	 *  node payloads to get the text for the nodes.  Detect
-	 *  parse trees and extract data appropriately.
-	 */
-	public static toStringTree(/*@NotNull*/ t: Tree): string;
+	
+	public static toStringTree( t: Tree): string;
 
-	/** Print out a whole tree in LISP form. {@link #getNodeText} is used on the
-	 *  node payloads to get the text for the nodes.  Detect
-	 *  parse trees and extract data appropriately.
-	 */
-	public static toStringTree(/*@NotNull*/ t: Tree, recog: Parser | undefined): string;
+	
+	public static toStringTree( t: Tree, recog: Parser | undefined): string;
 
-	/** Print out a whole tree in LISP form. {@link #getNodeText} is used on the
-	 *  node payloads to get the text for the nodes.
-	 */
-	public static toStringTree(/*@NotNull*/ t: Tree, /*@Nullable*/ ruleNames: string[] | undefined): string;
+	
+	public static toStringTree( t: Tree,  ruleNames: string[] | undefined): string;
 
-	public static toStringTree(/*@NotNull*/ t: Tree, arg2?: Parser | string[]): string;
+	public static toStringTree( t: Tree, arg2?: Parser | string[]): string;
 	public static toStringTree(@NotNull t: Tree, arg2?: Parser | string[]): string {
 		let ruleNames: string[] | undefined;
 		if (arg2 instanceof Parser) {
@@ -68,8 +57,8 @@ export class Trees {
 		return buf;
 	}
 
-	public static getNodeText(/*@NotNull*/ t: Tree, recog: Parser | undefined): string;
-	public static getNodeText(/*@NotNull*/ t: Tree, ruleNames: string[] | undefined): string;
+	public static getNodeText( t: Tree, recog: Parser | undefined): string;
+	public static getNodeText( t: Tree, ruleNames: string[] | undefined): string;
 	public static getNodeText(t: Tree, arg2: Parser | string[] | undefined): string {
 		let ruleNames: string[] | undefined;
 		if (arg2 instanceof Parser) {
@@ -77,7 +66,7 @@ export class Trees {
 		} else if (arg2) {
 			ruleNames = arg2;
 		} else {
-			// no recog or rule names
+			
 			let payload = t.payload;
 			if (typeof payload.text === "string") {
 				return payload.text;
@@ -105,7 +94,7 @@ export class Trees {
 		throw new TypeError("Unexpected node type");
 	}
 
-	/** Return ordered list of all children of this node */
+	
 	public static getChildren(t: ParseTree): ParseTree[];
 	public static getChildren(t: Tree): Tree[];
 	public static getChildren(t: Tree): Tree[] {
@@ -116,11 +105,7 @@ export class Trees {
 		return kids;
 	}
 
-	/** Return a list of all ancestors of this node.  The first node of
-	 *  list is the root and the last is the parent of this node.
-	 *
-	 *  @since 4.5.1
-	 */
+	
 	public static getAncestors(t: ParseTree): ParseTree[];
 	public static getAncestors(t: Tree): Tree[];
 	@NotNull
@@ -128,17 +113,13 @@ export class Trees {
 		let ancestors: Tree[] = [];
 		let p = t.parent;
 		while (p) {
-			ancestors.unshift(p); // insert at start
+			ancestors.unshift(p); 
 			p = p.parent;
 		}
 		return ancestors;
 	}
 
-	/** Return true if t is u's parent or a node on path to root from u.
-	 *  Use === not equals().
-	 *
-	 *  @since 4.5.1
-	 */
+	
 	public static isAncestorOf(t: Tree, u: Tree): boolean {
 		if (!t || !u || !t.parent) {
 			return false;
@@ -168,7 +149,7 @@ export class Trees {
 	}
 
 	public static _findAllNodes(t: ParseTree, index: number, findTokens: boolean, nodes: ParseTree[]): void {
-		// check this node (the root) first
+		
 		if (findTokens && t instanceof TerminalNode) {
 			if (t.symbol.type === index) {
 				nodes.push(t);
@@ -179,16 +160,13 @@ export class Trees {
 				nodes.push(t);
 			}
 		}
-		// check children
+		
 		for (let i = 0; i < t.childCount; i++) {
 			Trees._findAllNodes(t.getChild(i), index, findTokens, nodes);
 		}
 	}
 
-	/** Get all descendents; includes t itself.
-	 *
-	 * @since 4.5.1
-	 */
+	
 	public static getDescendants(t: ParseTree): ParseTree[] {
 		let nodes: ParseTree[] = [];
 
@@ -204,15 +182,11 @@ export class Trees {
 		return nodes;
 	}
 
-	/** Find smallest subtree of t enclosing range startTokenIndex..stopTokenIndex
-	 *  inclusively using postorder traversal.  Recursive depth-first-search.
-	 *
-	 *  @since 4.5
-	 */
+	
 	public static getRootOfSubtreeEnclosingRegion(
 		@NotNull t: ParseTree,
-		startTokenIndex: number, // inclusive
-		stopTokenIndex: number, // inclusive
+		startTokenIndex: number, 
+		stopTokenIndex: number, 
 	): ParserRuleContext | undefined {
 		let n: number = t.childCount;
 		for (let i = 0; i < n; i++) {
@@ -224,23 +198,16 @@ export class Trees {
 		}
 		if (t instanceof ParserRuleContext) {
 			let stopToken = t.stop;
-			if (startTokenIndex >= t.start.tokenIndex && // is range fully contained in t?
+			if (startTokenIndex >= t.start.tokenIndex && 
 				(stopToken == null || stopTokenIndex <= stopToken.tokenIndex)) {
-				// note: r.stop==null likely implies that we bailed out of parser and there's nothing to the right
+				
 				return t;
 			}
 		}
 		return undefined;
 	}
 
-	/** Replace any subtree siblings of root that are completely to left
-	 *  or right of lookahead range with a CommonToken(Token.INVALID_TYPE,"...")
-	 *  node. The source interval for t is not altered to suit smaller range!
-	 *
-	 *  WARNING: destructive to t.
-	 *
-	 *  @since 4.5.1
-	 */
+	
 	public static stripChildrenOutOfRange(
 		t: ParserRuleContext,
 		root: ParserRuleContext,
@@ -254,22 +221,19 @@ export class Trees {
 			let child = t.getChild(i);
 			let range: Interval = child.sourceInterval;
 			if (child instanceof ParserRuleContext && (range.b < startIndex || range.a > stopIndex)) {
-				if (Trees.isAncestorOf(child, root)) { // replace only if subtree doesn't have displayed root
+				if (Trees.isAncestorOf(child, root)) { 
 					let abbrev: CommonToken = new CommonToken(Token.INVALID_TYPE, "...");
-					t.children![i] = new TerminalNode(abbrev); // HACK access to private
+					t.children![i] = new TerminalNode(abbrev); 
 				}
 			}
 		}
 	}
 
-	/** Return first node satisfying the pred
-	 *
-	 *  @since 4.5.1
-	 */
+	
 	public static findNodeSuchThat(t: ParseTree, pred: (tree: ParseTree) => boolean): ParseTree | undefined;
 	public static findNodeSuchThat(t: Tree, pred: (tree: Tree) => boolean): Tree | undefined;
 	public static findNodeSuchThat(t: Tree, pred: (tree: ParseTree) => boolean): Tree | undefined {
-		// No type check needed as long as users only use one of the available overloads
+		
 		if (pred(t as ParseTree)) {
 			return t;
 		}

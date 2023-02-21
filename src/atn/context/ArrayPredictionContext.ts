@@ -1,7 +1,7 @@
 import { PredictionContext } from "./PredictionContext";
 import { PredictionContextCache } from "./PredictionContextCache";
 
-// 新增的类
+
 export class ArrayPredictionContext extends PredictionContext {
   public size: number;
   public getReturnState(index: number): number {

@@ -1,9 +1,6 @@
-/*!
- * Copyright 2016 The ANTLR Project. All rights reserved.
- * Licensed under the BSD-3-Clause license. See LICENSE file in the project root for license information.
- */
 
-// ConvertTo-TS run at 2016-10-03T02:09:41.7434086-07:00
+
+
 
 import * as assert from "assert";
 import { DefaultEqualityComparator } from "./DefaultEqualityComparator";
@@ -13,13 +10,13 @@ import { JavaCollection, JavaSet } from "./Stubs";
 import { ObjectEqualityComparator } from "./ObjectEqualityComparator";
 import { MurmurHash } from "./MurmurHash";
 
-/** {@link Set} implementation with closed hashing (open addressing). */
 
-// NOTE:  JavaScript's Set interface has on significant different diffrence from Java's:
-// 		  e.g. the return type of add() differs!
-//        For this reason I've commented tweaked the implements clause
 
-const INITAL_CAPACITY: number = 16; // must be power of 2
+
+
+
+
+const INITAL_CAPACITY: number = 16; 
 const LOAD_FACTOR: number = 0.75;
 
 export class Array2DHashSet<T extends { toString(): string; }> implements JavaSet<T> {
@@ -28,10 +25,10 @@ export class Array2DHashSet<T extends { toString(): string; }> implements JavaSe
 
 	protected buckets: Array<T[] | undefined>;
 
-	/** How many elements in set */
+	
 	protected n: number = 0;
 
-	protected threshold: number = Math.floor(INITAL_CAPACITY * LOAD_FACTOR); // when to expand
+	protected threshold: number = Math.floor(INITAL_CAPACITY * LOAD_FACTOR); 
 
 	constructor(comparator?: EqualityComparator<T>, initialCapacity?: number);
 	constructor(set: Array2DHashSet<T>);
@@ -57,11 +54,7 @@ export class Array2DHashSet<T extends { toString(): string; }> implements JavaSe
 		}
 	}
 
-	/**
-	 * Add `o` to set if not there; return existing value if already
-	 * there. This method performs the same operation as {@link #add} aside from
-	 * the return value.
-	 */
+	
 	public getOrAdd(o: T): T {
 		if (this.n > this.threshold) {
 			this.expand();
@@ -73,7 +66,7 @@ export class Array2DHashSet<T extends { toString(): string; }> implements JavaSe
 		let b: number = this.getBucket(o);
 		let bucket = this.buckets[b];
 
-		// NEW BUCKET
+		
 		if (!bucket) {
 			bucket = [o];
 			this.buckets[b] = bucket;
@@ -81,14 +74,14 @@ export class Array2DHashSet<T extends { toString(): string; }> implements JavaSe
 			return o;
 		}
 
-		// LOOK FOR IT IN BUCKET
+		
 		for (let existing of bucket) {
 			if (this.comparator.equals(existing, o)) {
-				return existing; // found existing, quit
+				return existing; 
 			}
 		}
 
-		// FULL BUCKET, expand and add to end
+		
 		bucket.push(o);
 		this.n++;
 		return o;
@@ -101,7 +94,7 @@ export class Array2DHashSet<T extends { toString(): string; }> implements JavaSe
 		let b: number = this.getBucket(o);
 		let bucket = this.buckets[b];
 		if (!bucket) {
-			// no bucket
+			
 			return undefined;
 		}
 
@@ -116,7 +109,7 @@ export class Array2DHashSet<T extends { toString(): string; }> implements JavaSe
 
 	protected getBucket(o: T): number {
 		let hash: number = this.comparator.hashCode(o);
-		let b: number = hash & (this.buckets.length - 1); // assumes len is power of 2
+		let b: number = hash & (this.buckets.length - 1); 
 		return b;
 	}
 
@@ -160,8 +153,8 @@ export class Array2DHashSet<T extends { toString(): string; }> implements JavaSe
 		let newTable: Array<T[] | undefined> = this.createBuckets(newCapacity);
 		this.buckets = newTable;
 		this.threshold = Math.floor(newCapacity * LOAD_FACTOR);
-//		System.out.println("new size="+newCapacity+", thres="+threshold);
-		// rehash all existing entries
+
+		
 		let oldSize: number = this.size;
 		for (let bucket of old) {
 			if (!bucket) {
@@ -221,8 +214,8 @@ export class Array2DHashSet<T extends { toString(): string; }> implements JavaSe
 	public toArray(): T[] {
 		const a = new Array<T>(this.size);
 
-		// Copy elements from the nested arrays into the destination array
-		let i: number = 0; // Position within destination array
+		
+		let i: number = 0; 
 		for (let bucket of this.buckets) {
 			if (bucket == null) {
 				continue;
@@ -340,30 +333,13 @@ export class Array2DHashSet<T extends { toString(): string; }> implements JavaSe
 		return buf;
 	}
 
-	/**
-	 * Return `o` as an instance of the element type `T`. If
-	 * `o` is non-undefined but known to not be an instance of `T`, this
-	 * method returns `undefined`. The base implementation does not perform any
-	 * type checks; override this method to provide strong type checks for the
-	 * {@link #contains} and {@link #remove} methods to ensure the arguments to
-	 * the {@link EqualityComparator} for the set always have the expected
-	 * types.
-	 *
-	 * @param o the object to try and cast to the element type of the set
-	 * @returns `o` if it could be an instance of `T`, otherwise
-	 * `undefined`.
-	 */
+	
 	@SuppressWarnings("unchecked")
 	protected asElementType(o: any): T {
 		return o as T;
 	}
 
-	/**
-	 * Return an array of `T[]` with length `capacity`.
-	 *
-	 * @param capacity the length of the array to return
-	 * @returns the newly constructed array
-	 */
+	
 	@SuppressWarnings("unchecked")
 	protected createBuckets(capacity: number): Array<T[] | undefined> {
 		return new Array<T[]>(capacity);
