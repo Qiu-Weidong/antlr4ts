@@ -44,3 +44,12 @@ export * from "./TokenStreamRewriter";
 export * from "./Vocabulary";
 export * from "./VocabularyImpl";
 export * from "./WritableToken";
+
+
+
+
+export * from './atn';
+export * from './dfa';
+export * from './exception';
+export * from './misc';
+export * from './tree';

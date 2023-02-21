@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "target",
+    "outDir": "dist",
     "sourceMap": true,
     "inlineSources": true,
     "module": "commonjs",
@@ -23,8 +23,6 @@
   },
   "exclude": [
     "node_modules",
-    "target",
-    "tool",
-    "test/runtime"
+    "src/antlr4ts/tree/xpath"
   ]
 }

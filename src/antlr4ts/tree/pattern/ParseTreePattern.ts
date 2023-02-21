@@ -5,7 +5,7 @@ import { NotNull } from "../../Decorators";
 import { ParseTree } from "../ParseTree";
 import { ParseTreeMatch } from "./ParseTreeMatch";
 import { ParseTreePatternMatcher } from "./ParseTreePatternMatcher";
-import { XPath } from "../xpath/XPath";
+// import { XPath } from "../xpath/XPath";
 
 
 export class ParseTreePattern {
@@ -50,14 +50,14 @@ export class ParseTreePattern {
 	
 	@NotNull
 	public findAll(@NotNull tree: ParseTree, @NotNull xpath: string): ParseTreeMatch[] {
-		let subtrees: Set<ParseTree> = XPath.findAll(tree, xpath, this._matcher.parser);
+		// let subtrees: Set<ParseTree> = XPath.findAll(tree, xpath, this._matcher.parser);
 		let matches: ParseTreeMatch[] = [];
-		for (let t of subtrees) {
-			let match: ParseTreeMatch = this.match(t);
-			if (match.succeeded) {
-				matches.push(match);
-			}
-		}
+		// for (let t of subtrees) {
+		// 	let match: ParseTreeMatch = this.match(t);
+		// 	if (match.succeeded) {
+		// 		matches.push(match);
+		// 	}
+		// }
 		return matches;
 	}
 
