@@ -20,7 +20,7 @@ import { ParserRuleContext } from "../../ParserRuleContext";
 import { ParseTree } from "../ParseTree";
 import { ParseTreeMatch } from "./ParseTreeMatch";
 import { ParseTreePattern } from "./ParseTreePattern";
-import { RecognitionException } from "../../RecognitionException";
+import { RecognitionException } from "../../exception/RecognitionException";
 import { RuleNode } from "../RuleNode";
 import { RuleTagToken } from "./RuleTagToken";
 import { TagChunk } from "./TagChunk";

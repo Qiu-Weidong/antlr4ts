@@ -7,11 +7,11 @@
 
 import { DefaultErrorStrategy } from "./DefaultErrorStrategy";
 import { Parser } from "./Parser";
-import { InputMismatchException } from "./InputMismatchException";
+import { InputMismatchException } from "./exception/InputMismatchException";
 import { Override } from "./Decorators";
 import { ParseCancellationException } from "./misc/ParseCancellationException";
 import { ParserRuleContext } from "./ParserRuleContext";
-import { RecognitionException } from "./RecognitionException";
+import { RecognitionException } from "./exception/RecognitionException";
 import { Token } from "./Token";
 
 /**

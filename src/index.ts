@@ -5,8 +5,6 @@
 
 export * from "./ANTLRErrorListener";
 export * from "./ANTLRErrorStrategy";
-// export * from "./ANTLRFileStream";
-export * from "./ANTLRInputStream";
 export * from "./BailErrorStrategy";
 export * from "./BufferedTokenStream";
 export * from "./CharStream";
@@ -20,8 +18,8 @@ export * from "./ConsoleErrorListener";
 export * from "./DefaultErrorStrategy";
 export * from "./Dependents";
 export * from "./DiagnosticErrorListener";
-export * from "./FailedPredicateException";
-export * from "./InputMismatchException";
+export * from "./exception/FailedPredicateException";
+export * from "./exception/InputMismatchException";
 export * from "./InterpreterRuleContext";
 export * from "./IntStream";
 export * from "./Lexer";
@@ -35,7 +33,7 @@ export * from "./ParserInterpreter";
 export * from "./ParserRuleContext";
 export * from "./ProxyErrorListener";
 export * from "./ProxyParserErrorListener";
-export * from "./RecognitionException";
+export * from "./exception/RecognitionException";
 export * from "./Recognizer";
 export * from "./RuleContext";
 export * from "./RuleContextWithAltNum";

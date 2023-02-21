@@ -7,7 +7,7 @@
 
 /** How to emit recognition errors. */
 import { Recognizer } from "./Recognizer";
-import { RecognitionException } from "./RecognitionException";
+import { RecognitionException } from "./exception/RecognitionException";
 
 export interface ANTLRErrorListener<TSymbol> {
 	/**

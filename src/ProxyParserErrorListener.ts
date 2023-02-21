@@ -9,7 +9,7 @@ import { ATNConfigSet } from "./atn/ATNConfigSet";
 import { BitSet } from "./misc/BitSet";
 import { DFA } from "./dfa/DFA";
 import { Parser } from "./Parser";
-import { RecognitionException } from "./RecognitionException";
+import { RecognitionException } from "./exception/RecognitionException";
 import { Recognizer } from "./Recognizer";
 import { ProxyErrorListener } from "./ProxyErrorListener";
 import { ParserErrorListener } from "./ParserErrorListener";

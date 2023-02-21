@@ -3,20 +3,15 @@
  * Licensed under the BSD-3-Clause license. See LICENSE file in the project root for license information.
  */
 
+import { Override } from "../Decorators";
+import { Array2DHashMap, BitSet, EqualityComparator, MurmurHash } from "../misc";
+import { ATNConfig } from "./config/ATNConfig";
+import { ATNConfigSet } from "./config/ATNConfigSet";
+import { RuleStopState } from "./state/RuleStopState";
+
 // ConvertTo-TS run at 2016-10-04T11:26:36.2673893-07:00
 
-import { Array2DHashMap } from "../misc/Array2DHashMap";
-import { ATN } from "./ATN";
-import { ATNConfig } from "./ATNConfig";
-import { ATNConfigSet } from "./ATNConfigSet";
-import { ATNState } from "./ATNState";
-import { BitSet } from "../misc/BitSet";
-import { EqualityComparator } from "../misc/EqualityComparator";
-import { MurmurHash } from "../misc/MurmurHash";
-import { ObjectEqualityComparator } from "../misc/ObjectEqualityComparator";
-import { Override } from "../Decorators";
-import { RuleStopState } from "./RuleStopState";
-import { SemanticContext } from "./SemanticContext";
+
 
 /**
  * This enumeration defines the prediction modes available in ANTLR 4 along with

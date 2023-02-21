@@ -7,7 +7,7 @@
 
 import { ATN } from "../atn/ATN";
 import { ATNSimulator } from "../atn/ATNSimulator";
-import { ATNState } from "../atn/ATNState";
+import { ATNState } from "../atn/state/ATNState";
 import { DFA } from "./DFA";
 import { DFAState } from "./DFAState";
 import { NotNull, Override } from "../Decorators";

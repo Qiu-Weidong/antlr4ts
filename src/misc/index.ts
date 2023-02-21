@@ -5,7 +5,6 @@
 
 export * from "./Array2DHashMap";
 export * from "./ArrayEqualityComparator";
-export * from "./Args";
 export * from "./Array2DHashSet";
 export * from "./Arrays";
 export * from "./BitSet";

@@ -7,24 +7,24 @@
 
 import { ANTLRErrorStrategy } from "./ANTLRErrorStrategy";
 import { ATN } from "./atn/ATN";
-import { ATNState } from "./atn/ATNState";
-import { ATNStateType } from "./atn/ATNStateType";
-import { FailedPredicateException } from "./FailedPredicateException";
-import { InputMismatchException } from "./InputMismatchException";
+import { ATNState } from "./atn/state/ATNState";
+import { FailedPredicateException } from "./exception/FailedPredicateException";
+import { InputMismatchException } from "./exception/InputMismatchException";
 import { IntervalSet } from "./misc/IntervalSet";
 import { NoViableAltException } from "./NoViableAltException";
 import { Parser } from "./Parser";
 import { ParserRuleContext } from "./ParserRuleContext";
-import { PredictionContext } from "./atn/PredictionContext";
-import { RecognitionException } from "./RecognitionException";
+import { RecognitionException } from "./exception/RecognitionException";
 import { RuleContext } from "./RuleContext";
-import { RuleTransition } from "./atn/RuleTransition";
 import { TokenStream } from "./TokenStream";
 import { Token } from "./Token";
 import { TokenFactory } from "./TokenFactory";
 import { TokenSource } from "./TokenSource";
 import { Vocabulary } from "./Vocabulary";
 import { Override, NotNull } from "./Decorators";
+import { PredictionContext } from "./atn/context/PredictionContext";
+import { ATNStateType } from "./atn/state/ATNStateType";
+import { RuleTransition } from "./atn/transition/RuleTransition";
 
 /**
  * This is the default implementation of {@link ANTLRErrorStrategy} used for

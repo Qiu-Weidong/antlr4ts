@@ -8,7 +8,7 @@
 import { ANTLRErrorListener } from "../../ANTLRErrorListener";
 import { Override } from "../../Decorators";
 import { Recognizer } from "../../Recognizer";
-import { RecognitionException } from "../../RecognitionException";
+import { RecognitionException } from "../../exception/RecognitionException";
 
 export class XPathLexerErrorListener implements ANTLRErrorListener<number> {
 	@Override

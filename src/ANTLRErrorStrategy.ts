@@ -7,7 +7,7 @@
 
 import { Parser } from "./Parser";
 import { Token } from "./Token";
-import { RecognitionException } from "./RecognitionException";
+import { RecognitionException } from "./exception/RecognitionException";
 
 /**
  * The interface for defining strategies to deal with syntax errors encountered

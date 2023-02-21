@@ -5,26 +5,26 @@
 
 // ConvertTo-TS run at 2016-10-04T11:26:36.4188352-07:00
 
-import { AmbiguityInfo } from "./AmbiguityInfo";
+import { AmbiguityInfo } from "./info/AmbiguityInfo";
 import { ATN } from "./ATN";
-import { ATNConfigSet } from "./ATNConfigSet";
 import { ATNSimulator } from "./ATNSimulator";
 import { BitSet } from "../misc/BitSet";
-import { ContextSensitivityInfo } from "./ContextSensitivityInfo";
-import { DecisionInfo } from "./DecisionInfo";
 import { DFA } from "../dfa/DFA";
 import { DFAState } from "../dfa/DFAState";
-import { ErrorInfo } from "./ErrorInfo";
 import { NotNull, Override } from "../Decorators";
-import { LookaheadEventInfo } from "./LookaheadEventInfo";
 import { Parser } from "../Parser";
 import { ParserATNSimulator } from "./ParserATNSimulator";
 import { ParserRuleContext } from "../ParserRuleContext";
-import { PredicateEvalInfo } from "./PredicateEvalInfo";
-import { PredictionContextCache } from "./PredictionContextCache";
-import { SemanticContext } from "./SemanticContext";
-import { SimulatorState } from "./SimulatorState";
 import { TokenStream } from "../TokenStream";
+import { ATNConfigSet } from "./config/ATNConfigSet";
+import { PredictionContextCache } from "./context/PredictionContextCache";
+import { SemanticContext } from "./context/SemanticContext";
+import { ContextSensitivityInfo } from "./info/ContextSensitivityInfo";
+import { DecisionInfo } from "./info/DecisionInfo";
+import { ErrorInfo } from "./info/ErrorInfo";
+import { LookaheadEventInfo } from "./info/LookaheadEventInfo";
+import { PredicateEvalInfo } from "./info/PredicateEvalInfo";
+import { SimulatorState } from "./state/SimulatorState";
 
 /**
  * @since 4.3

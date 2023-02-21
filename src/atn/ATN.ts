@@ -5,26 +5,25 @@
 
 // ConvertTo-TS run at 2016-10-04T11:26:25.1063510-07:00
 
-import { Array2DHashMap } from "../misc/Array2DHashMap";
-import { ATNState } from "./ATNState";
-import { ATNType } from "./ATNType";
-import { DecisionState } from "./DecisionState";
-import { DFA } from "../dfa/DFA";
-import { IntervalSet } from "../misc/IntervalSet";
-import { InvalidState } from "./InvalidState";
-import { LexerAction } from "./LexerAction";
-import { LL1Analyzer } from "./LL1Analyzer";
-import { NotNull } from "../Decorators";
-import { ObjectEqualityComparator } from "../misc/ObjectEqualityComparator";
-import { PredictionContext } from "./PredictionContext";
-import { RuleContext } from "../RuleContext";
-import { RuleStartState } from "./RuleStartState";
-import { RuleStopState } from "./RuleStopState";
-import { RuleTransition } from "./RuleTransition";
-import { Token } from "../Token";
-import { TokensStartState } from "./TokensStartState";
+
 
 import * as assert from "assert";
+import { NotNull } from "../Decorators";
+import { DFA } from "../dfa";
+import { Array2DHashMap, ObjectEqualityComparator, IntervalSet } from "../misc";
+import { RuleContext } from "../RuleContext";
+import { Token } from "../Token";
+import { LexerAction } from "./action/LexerAction";
+import { ATNType } from "./ATNType";
+import { PredictionContext } from "./context/PredictionContext";
+import { LL1Analyzer } from "./LL1Analyzer";
+import { ATNState } from "./state/ATNState";
+import { DecisionState } from "./state/DecisionState";
+import { InvalidState } from "./state/InvalidState";
+import { RuleStartState } from "./state/RuleStartState";
+import { RuleStopState } from "./state/RuleStopState";
+import { TokensStartState } from "./state/TokensStartState";
+import { RuleTransition } from "./transition/RuleTransition";
 
 /** */
 export class ATN {

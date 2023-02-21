@@ -7,13 +7,13 @@
 
 import { ActionTransition } from "./atn/ActionTransition";
 import { ATN } from "./atn/ATN";
-import { ATNState } from "./atn/ATNState";
+import { ATNState } from "./atn/state/ATNState";
 import { ATNStateType } from "./atn/ATNStateType";
-import { AtomTransition } from "./atn/AtomTransition";
+import { AtomTransition } from "./atn/transition/AtomTransition";
 import { BitSet } from "./misc/BitSet";
 import { DecisionState } from "./atn/DecisionState";
-import { FailedPredicateException } from "./FailedPredicateException";
-import { InputMismatchException } from "./InputMismatchException";
+import { FailedPredicateException } from "./exception/FailedPredicateException";
+import { InputMismatchException } from "./exception/InputMismatchException";
 import { InterpreterRuleContext } from "./InterpreterRuleContext";
 import { LoopEndState } from "./atn/LoopEndState";
 import { NotNull } from "./Decorators";
@@ -23,7 +23,7 @@ import { ParserATNSimulator } from "./atn/ParserATNSimulator";
 import { ParserRuleContext } from "./ParserRuleContext";
 import { PrecedencePredicateTransition } from "./atn/PrecedencePredicateTransition";
 import { PredicateTransition } from "./atn/PredicateTransition";
-import { RecognitionException } from "./RecognitionException";
+import { RecognitionException } from "./exception/RecognitionException";
 import { RuleStartState } from "./atn/RuleStartState";
 import { RuleTransition } from "./atn/RuleTransition";
 import { StarLoopEntryState } from "./atn/StarLoopEntryState";

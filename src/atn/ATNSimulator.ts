@@ -3,13 +3,15 @@
  * Licensed under the BSD-3-Clause license. See LICENSE file in the project root for license information.
  */
 
+import { NotNull } from "../Decorators";
+import { DFAState } from "../dfa";
+import { ATN } from "./ATN";
+import { ATNConfigSet } from "./config/ATNConfigSet";
+import { PredictionContext } from "./context/PredictionContext";
+
 // ConvertTo-TS run at 2016-10-04T11:26:27.3184311-07:00
 
-import { ATN } from "./ATN";
-import { ATNConfigSet } from "./ATNConfigSet";
-import { DFAState } from "../dfa/DFAState";
-import { NotNull } from "../Decorators";
-import { PredictionContext } from "./PredictionContext";
+
 
 export abstract class ATNSimulator {
 	/** Must distinguish between missing edge and edge we know leads nowhere */

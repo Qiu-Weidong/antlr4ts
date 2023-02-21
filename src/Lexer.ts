@@ -14,7 +14,7 @@ import { IntStream } from "./IntStream";
 import { LexerATNSimulator } from "./atn/LexerATNSimulator";
 import { LexerNoViableAltException } from "./LexerNoViableAltException";
 import { Override } from "./Decorators";
-import { RecognitionException } from "./RecognitionException";
+import { RecognitionException } from "./exception/RecognitionException";
 import { Recognizer } from "./Recognizer";
 import { Token } from "./Token";
 import { TokenFactory } from "./TokenFactory";

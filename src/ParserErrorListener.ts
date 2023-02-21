@@ -12,7 +12,7 @@ import { Parser } from "./Parser";
 import { SimulatorState } from "./atn/SimulatorState";
 import { Token } from "./Token";
 import * as Stubs from "./misc/Stubs";
-import * as Exception from "./RecognitionException";
+import * as Exception from "./exception/RecognitionException";
 
 /** How to emit recognition errors for parsers.
  */

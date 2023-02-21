@@ -8,7 +8,7 @@
 import { Array2DHashSet } from "../misc/Array2DHashSet";
 import { ATN } from "../atn/ATN";
 import { ATNConfigSet } from "../atn/ATNConfigSet";
-import { ATNState } from "../atn/ATNState";
+import { ATNState } from "../atn/state/ATNState";
 import { ATNType } from "../atn/ATNType";
 import { DecisionState } from "../atn/DecisionState";
 import { DFASerializer } from "./DFASerializer";

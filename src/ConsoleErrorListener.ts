@@ -6,7 +6,7 @@
 // ConvertTo-TS run at 2016-10-04T11:26:50.5479602-07:00
 
 import { ANTLRErrorListener } from "./ANTLRErrorListener";
-import { RecognitionException } from "./RecognitionException";
+import { RecognitionException } from "./exception/RecognitionException";
 import { Recognizer } from "./Recognizer";
 
 /**

@@ -3,25 +3,23 @@
  * Licensed under the BSD-3-Clause license. See LICENSE file in the project root for license information.
  */
 
+import { NotNull } from "../Decorators";
+import { IntervalSet, Array2DHashSet, ObjectEqualityComparator, BitSet } from "../misc";
+import { Token } from "../Token";
+import { ATN } from "./ATN";
+import { ATNConfig } from "./config/ATNConfig";
+import { PredictionContext } from "./context/PredictionContext";
+import { ATNState } from "./state/ATNState";
+import { RuleStopState } from "./state/RuleStopState";
+import { AbstractPredicateTransition } from "./transition/AbstractPredicateTransition";
+import { NotSetTransition } from "./transition/NotSetTransition";
+import { RuleTransition } from "./transition/RuleTransition";
+import { Transition } from "./transition/Transition";
+import { WildcardTransition } from "./transition/WildcardTransition";
+
 // ConvertTo-TS run at 2016-10-04T11:26:30.4445360-07:00
 
-import { AbstractPredicateTransition } from "./AbstractPredicateTransition";
-import { Array2DHashSet } from "../misc/Array2DHashSet";
-import { ATN } from "./ATN";
-import { ATNConfig } from "./ATNConfig";
-import { ATNState } from "./ATNState";
-import { BitSet } from "../misc/BitSet";
-import { IntervalSet } from "../misc/IntervalSet";
-import { NotNull } from "../Decorators";
-import { NotSetTransition } from "./NotSetTransition";
-import { ObjectEqualityComparator } from "../misc/ObjectEqualityComparator";
-import { PredictionContext } from "./PredictionContext";
-import { RuleStopState } from "./RuleStopState";
-import { RuleTransition } from "./RuleTransition";
-import { SetTransition } from "./SetTransition";
-import { Token } from "../Token";
-import { Transition } from "./Transition";
-import { WildcardTransition } from "./WildcardTransition";
+
 
 export class LL1Analyzer {
 	/** Special value added to the lookahead sets to indicate that we hit
@@ -162,7 +160,7 @@ export class LL1Analyzer {
 	 */
 	protected _LOOK(
 		@NotNull s: ATNState,
-		stopState: ATNState | undefined,
+		stopState: ATNState | undefined | null,
 		@NotNull ctx: PredictionContext,
 		@NotNull look: IntervalSet,
 		@NotNull lookBusy: Array2DHashSet<ATNConfig>,

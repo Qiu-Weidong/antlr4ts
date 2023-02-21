@@ -5,18 +5,18 @@
 
 // ConvertTo-TS run at 2016-10-04T11:26:51.2133685-07:00
 
-import { ATNConfig } from "./atn/ATNConfig";
-import { ATNConfigSet } from "./atn/ATNConfigSet";
+import { ATNConfig } from "./atn/config/ATNConfig";
 import { BitSet } from "./misc/BitSet";
 import { DFA } from "./dfa/DFA";
 import { Parser } from "./Parser";
 import { ParserErrorListener } from "./ParserErrorListener";
-import { RecognitionException } from "./RecognitionException";
+import { RecognitionException } from "./exception/RecognitionException";
 import { Recognizer } from "./Recognizer";
-import { SimulatorState } from "./atn/SimulatorState";
 import { Token } from "./Token";
 import { Override, NotNull } from "./Decorators";
 import { Interval } from "./misc/Interval";
+import { ATNConfigSet } from "./atn/config/ATNConfigSet";
+import { SimulatorState } from "./atn/state/SimulatorState";
 
 /**
  * This implementation of {@link ANTLRErrorListener} can be used to identify

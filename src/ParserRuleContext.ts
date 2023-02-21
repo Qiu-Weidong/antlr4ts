@@ -10,7 +10,7 @@ import { Override } from "./Decorators";
 import { Parser } from "./Parser";
 import { ParseTree } from "./tree/ParseTree";
 import { ParseTreeListener } from "./tree/ParseTreeListener";
-import { RecognitionException } from "./RecognitionException";
+import { RecognitionException } from "./exception/RecognitionException";
 import { RuleContext } from "./RuleContext";
 import { TerminalNode } from "./tree/TerminalNode";
 import { Token } from "./Token";

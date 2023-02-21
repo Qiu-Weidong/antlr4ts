@@ -5,31 +5,30 @@
 
 // ConvertTo-TS run at 2016-10-04T11:26:29.1083066-07:00
 
-import { AcceptStateInfo } from "../dfa/AcceptStateInfo";
-import { ActionTransition } from "./ActionTransition";
-import { ATN } from "./ATN";
-import { ATNConfig } from "./ATNConfig";
-import { ATNConfigSet } from "./ATNConfigSet";
-import { ATNSimulator } from "./ATNSimulator";
-import { ATNState } from "./ATNState";
+
+import * as assert from "assert";
 import { CharStream } from "../CharStream";
-import { DFA } from "../dfa/DFA";
-import { DFAState } from "../dfa/DFAState";
-import { Interval } from "../misc/Interval";
+import { NotNull, Override } from "../Decorators";
+import { DFAState, AcceptStateInfo, DFA } from "../dfa";
 import { IntStream } from "../IntStream";
 import { Lexer } from "../Lexer";
-import { LexerActionExecutor } from "./LexerActionExecutor";
 import { LexerNoViableAltException } from "../LexerNoViableAltException";
-import { NotNull, Override } from "../Decorators";
-import { OrderedATNConfigSet } from "./OrderedATNConfigSet";
-import { PredictionContext } from "./PredictionContext";
-import { PredicateTransition } from "./PredicateTransition";
-import { RuleStopState } from "./RuleStopState";
-import { RuleTransition } from "./RuleTransition";
+import { Interval } from "../misc";
 import { Token } from "../Token";
-import { Transition } from "./Transition";
-import { TransitionType } from "./TransitionType";
-import * as assert from "assert";
+import { LexerActionExecutor } from "./action/LexerActionExecutor";
+import { ATN } from "./ATN";
+import { ATNSimulator } from "./ATNSimulator";
+import { ATNConfig } from "./config/ATNConfig";
+import { ATNConfigSet } from "./config/ATNConfigSet";
+import { OrderedATNConfigSet } from "./config/OrderedATNConfigSet";
+import { PredictionContext } from "./context/PredictionContext";
+import { ATNState } from "./state/ATNState";
+import { RuleStopState } from "./state/RuleStopState";
+import { ActionTransition } from "./transition/ActionTransition";
+import { PredicateTransition } from "./transition/PredicateTransition";
+import { RuleTransition } from "./transition/RuleTransition";
+import { Transition } from "./transition/Transition";
+import { TransitionType } from "./transition/TransitionType";
 
 /** "dup" of ParserInterpreter */
 export class LexerATNSimulator extends ATNSimulator {
