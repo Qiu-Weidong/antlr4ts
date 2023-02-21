@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
+    "module": "commonjs",
+		"target": "es2020",
+		"lib": ["es2020"],
+		"strict": true,
     "outDir": "dist",
+    "allowJs": true,
     "sourceMap": true,
     "inlineSources": true,
-    "module": "commonjs",
-    "target": "es2015",
-    "lib": [
-      "es6"
-    ],
+    
     "noImplicitAny": true,
-    "strict": true,
     "experimentalDecorators": true,
     "declaration": true,
     "preserveConstEnums": true,

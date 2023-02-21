@@ -28,6 +28,7 @@
     "typescript": "^4.0.5"
   },
   "scripts": {
+    "compile": "tsc -p ./",
     "antlr4ts": "antlr4ts src/antlr4ts/tree/xpath/XPathLexer.g4  -o src/antlr4ts/tree/xpath"
   },
   "dependencies": {
