@@ -156,15 +156,6 @@ export class ParserRuleContext extends RuleContext {
 	/** Add a token leaf node child and force its parent to be this node. */
 	public addChild(t: TerminalNode): void;
 	public addChild(ruleInvocation: RuleContext): void;
-	/**
-	 * Add a child to this node based upon matchedToken. It
-	 * creates a TerminalNodeImpl rather than using
-	 * {@link Parser#createTerminalNode(ParserRuleContext, Token)}. I'm leaving this
-	 * in for compatibility but the parser doesn't use this anymore.
-	 *
-	 * @deprecated Use another overload instead.
-	 */
-	public addChild(matchedToken: Token): TerminalNode;
 	public addChild(t: TerminalNode | RuleContext | Token): TerminalNode | void {
 		let result: TerminalNode | void;
 		if (t instanceof TerminalNode) {
@@ -190,15 +181,6 @@ export class ParserRuleContext extends RuleContext {
 	 */
 	public addErrorNode(errorNode: ErrorNode): ErrorNode;
 
-	/**
-	 * Add a child to this node based upon badToken. It
-	 * creates a ErrorNode rather than using
-	 * {@link Parser#createErrorNode(ParserRuleContext, Token)}. I'm leaving this
-	 * in for compatibility but the parser doesn't use this anymore.
-	 *
-	 * @deprecated Use another overload instead.
-	 */
-	public addErrorNode(badToken: Token): ErrorNode;
 	public addErrorNode(node: ErrorNode | Token): ErrorNode {
 		if (node instanceof ErrorNode) {
 			const errorNode: ErrorNode = node;

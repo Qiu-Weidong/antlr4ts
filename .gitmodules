@@ -1,4 +1,0 @@
-[submodule "reference/antlr4"]
-	path = reference/antlr4
-	url = https://github.com/tunnelvisionlabs/antlr4.git
-	branch = master
